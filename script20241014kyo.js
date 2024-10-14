@@ -9,12 +9,6 @@ let kyonshiPosition = gameArea.offsetWidth; // キョンシーの初期位置を
 let gravity = 0.9;
 let score = 0; // スコアをカウントする変数
 
-// スコアを表示する要素を追加
-let scoreDisplay = document.createElement("p");
-scoreDisplay.id = "scoreDisplay";
-scoreDisplay.textContent = `スコア: ${score}`;
-document.body.insertBefore(scoreDisplay, message);
-
 // ジャンプ処理
 function jump() {
     if (!isJumping) {
@@ -55,32 +49,28 @@ function moveKyonshi() {
             kyonshiPosition = gameArea.offsetWidth;
             kyonshiSpeed += 0.5;  // 少しずつスピードアップ
             score++; // スコアを加算
-            scoreDisplay.textContent = `スコア: ${score}`; // スコアを更新
+            message.textContent = `スコア: ${score}`; // スコアを更新
         }
 
         // 当たり判定
         if (kyonshiPosition < 50 && playerPosition < 50 && kyonshiPosition > 0) {
             clearInterval(kyonshiInterval);
             message.textContent = "ゲームオーバー！リロードして再挑戦してください";
-            document.removeEventListener("keydown", jumpKeyHandler);
-            document.removeEventListener("click", jumpClickHandler);
         }
     }, 20);
 }
 
-// キーボードのスペースキーでジャンプ
-function jumpKeyHandler(event) {
+// ジャンプイベントリスナー（スペースキーでジャンプ）
+document.addEventListener("keydown", (event) => {
     if (event.code === "Space") {
         jump();
     }
-}
+});
 
-// クリックでジャンプ
-function jumpClickHandler() {
+// ジャンプイベントリスナー（クリックでジャンプ）
+document.addEventListener("click", () => {
     jump();
-}
+});
 
-document.addEventListener("keydown", jumpKeyHandler);
-document.addEventListener("click", jumpClickHandler);
-
+// ゲーム開始
 moveKyonshi();
