@@ -1,3 +1,4 @@
+/* 基本スタイル (デスクトップや大きい画面用) */
 body {
     text-align: center;
     font-family: Arial, sans-serif;
@@ -5,34 +6,78 @@ body {
 }
 
 #gameArea {
-    position: relative;
     width: 600px;
     height: 300px;
     margin: 20px auto;
     border: 2px solid black;
     background-color: #fff;
     overflow: hidden;
+    position: relative;
+}
+
+#player, #kyonshi {
+    position: absolute;
+    bottom: 0;
+    width: 50px;
+    height: 50px;
 }
 
 #player {
-    position: absolute;
-    bottom: 0;
-    width: 50px;
-    height: 50px;
     background-color: #4682b4;
+    left: 50px; /* プレイヤーの初期位置 */
 }
 
 #kyonshi {
-    position: absolute;
-    bottom: 0;
-    right: -50px;
-    width: 50px;
-    height: 50px;
     background-color: #8b0000;
+    right: -50px; /* キョンシーの初期位置 */
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    margin-top: 20px;
 }
 
 #message {
     font-size: 20px;
-    font-weight: bold;
     margin-top: 20px;
+    font-weight: bold;
+}
+
+/* スマートフォン向けのレスポンシブスタイル */
+@media (max-width: 600px) {
+    body {
+        font-size: 16px;
+    }
+
+    #gameArea {
+        width: 100%; /* 画面幅にフィット */
+        height: 50vh; /* 画面高さの50%を使用 */
+    }
+
+    #player, #kyonshi {
+        width: 30px; /* キャラクターのサイズを小さく */
+        height: 30px;
+    }
+
+    #message {
+        font-size: 16px;
+    }
+}
+
+/* タブレット向けのレスポンシブスタイル */
+@media (max-width: 900px) and (min-width: 601px) {
+    #gameArea {
+        width: 80%; /* タブレットでは80%の幅を使用 */
+        height: 40vh;
+    }
+
+    #player, #kyonshi {
+        width: 40px;
+        height: 40px;
+    }
+
+    #message {
+        font-size: 18px;
+    }
 }
